@@ -40,9 +40,11 @@ def get_audio_input(prompt):
             return text.lower()
         except sr.UnknownValueError:
             print("Sorry, I didn't catch that. Could you repeat?")
+            speak("Sorry, I didn't catch that. Could you repeat?")
             return get_audio_input(prompt)
         except sr.RequestError:
             print("There was an error with the speech recognition service.")
+            speak("There was an error with the speech recognition service.")
             return ""
 
 engine = pyttsx3.init()
@@ -103,6 +105,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
