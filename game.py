@@ -53,10 +53,7 @@ engine.setProperty('voice', voices[1].id)
 def speak(text):
     """Convert text to speech."""
     engine.say(text)
-    try:
-        engine.runAndWait()
-    except RuntimeError:
-        pass
+    engine.runAndWait()
 
 def main():
     print("Say 'let's go' to begin.")
