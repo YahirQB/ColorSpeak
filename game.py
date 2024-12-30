@@ -14,8 +14,8 @@ COLORS = [
     ("pink", (255, 192, 203)),
     ("black", (0, 0, 0)),
     ("white", (255, 255, 255)),
-    ("brown", (165, 42, 42)),
-    ("gray", (128, 128, 128)),
+    ("brown", (150, 75, 0)),
+    ("grey", (128, 128, 128)),
     ("gold", (255, 215, 0)),
     ("silver", (192, 192, 192)),
     ("crimson", (220, 20, 60)),
@@ -53,7 +53,10 @@ engine.setProperty('voice', voices[1].id)
 def speak(text):
     """Convert text to speech."""
     engine.say(text)
-    engine.runAndWait()
+    try:
+        engine.runAndWait()
+    except RuntimeError:
+        pass
 
 def main():
     print("Say 'let's go' to begin.")
@@ -86,7 +89,7 @@ def main():
                 else:
                     print(f"Incorrect. You have {max_guesses - guess - 1} guesses left.")
                     speak(f"Incorrect. You have {max_guesses - guess - 1} guesses left.")
-                    print(f"You said: {response}")
+                    
                     if guess == max_guesses - 1:
                         print(f"The answer was {color_name}.")
                         speak(f"The answer was {color_name}.")
@@ -98,7 +101,7 @@ def main():
         speak("Do you want to play another round? Say yes or no.")
         command = get_audio_input("Do you want to play another round?").lower()
 
-        if command != "yes":
+        if "yes" not in command:
             print(f"Thanks for playing! Your final score is: {score}")
             speak(f"Thanks for playing! Your final score is {score}.")
             break
